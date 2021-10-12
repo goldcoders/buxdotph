@@ -88,6 +88,9 @@ class Channels {
     ...otc_ecpay,
     ...otc_bayad_center,
   ];
+
+  static List<String?> otc_list =
+      Channels.otc.map((Channels e) => e.value).toList();
   // END OTC
 
   // BANK
@@ -101,6 +104,9 @@ class Channels {
     rcbc_dragonpay,
   ];
 
+  static List<String?> bank_list =
+      Channels.banks.map((Channels e) => e.value).toList();
+
   // EWALLET
   static const Channels gcash_direct = Channels._(GCASH);
   static const Channels grabpay_direct = Channels._(GRABPAY);
@@ -109,18 +115,27 @@ class Channels {
     gcash_direct,
     grabpay_direct,
   ];
+
+  static List<String?> ewallet_list =
+      Channels.ewallets.map((Channels e) => e.value).toList();
   // Card payments
   static const Channels cardpayment_xendit = Channels._(CARD);
 
   static const List<Channels> cards = <Channels>[
     cardpayment_xendit,
   ];
+
+  static List<String?> card_list =
+      Channels.cards.map((Channels e) => e.value).toList();
   // Buy Now Pay Later
   static const Channels billease_direct = Channels._(BNPL);
 
   static const List<Channels> buy_now_pay_later = <Channels>[
     billease_direct,
   ];
+
+  static List<String?> buy_now_pay_later_list =
+      Channels.buy_now_pay_later.map((Channels e) => e.value).toList();
   // List All Mode of Payments
   static const List<Channels> all = <Channels>[
     ...otc,
@@ -129,6 +144,9 @@ class Channels {
     ...cards,
     ...buy_now_pay_later,
   ];
+
+  static List<String?> list_all =
+      Channels.all.map((Channels e) => e.value).toList();
 
   static Channels parse(String value) {
     switch (value) {
