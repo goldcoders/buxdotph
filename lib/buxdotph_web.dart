@@ -17,7 +17,7 @@ class BuxdotphWeb {
       registrar,
     );
 
-    final pluginInstance = BuxdotphWeb();
+    final BuxdotphWeb pluginInstance = BuxdotphWeb();
     channel.setMethodCallHandler(pluginInstance.handleMethodCall);
   }
 
@@ -31,6 +31,7 @@ class BuxdotphWeb {
       default:
         throw PlatformException(
           code: 'Unimplemented',
+          // ignore: avoid_escaping_inner_quotes
           details: 'buxdotph for web doesn\'t implement \'${call.method}\'',
         );
     }
@@ -38,7 +39,8 @@ class BuxdotphWeb {
 
   /// Returns a [String] containing the version of the platform.
   Future<String> getPlatformVersion() {
-    final version = html.window.navigator.userAgent;
+    final String version = html.window.navigator.userAgent;
+    // ignore: always_specify_types
     return Future.value(version);
   }
 }

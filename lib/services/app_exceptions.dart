@@ -7,34 +7,36 @@ class AppException implements Exception {
 }
 
 class BadRequestException extends AppException {
-  BadRequestException(String message, String url) : super('Bad Request', url);
+  BadRequestException(String? message, String url)
+      : super((message != null) ? message : 'Bad Request', url);
 }
 
 class DefaultException extends AppException {
-  DefaultException(String message, String url)
-      : super('Unable to Process Request', url);
+  DefaultException(String? message, String url)
+      : super((message != null) ? message : 'Unable to Process Request', url);
 }
 
 class RequestTookLongException extends AppException {
-  RequestTookLongException(String message, String url)
-      : super('Server Not Responding', url);
+  RequestTookLongException(String? message, String url)
+      : super((message != null) ? message : 'Server Not Responding', url);
 }
 
 class UnauthorizedException extends AppException {
-  UnauthorizedException(String message, String url)
-      : super('Unauthorized Request', url);
+  UnauthorizedException(String? message, String url)
+      : super((message != null) ? message : 'Unauthorized Request', url);
 }
 
 class ForbiddenRequestException extends AppException {
-  ForbiddenRequestException(String message, String url)
-      : super('Forbidden Request', url);
+  ForbiddenRequestException(String? message, String url)
+      : super((message != null) ? message : 'Forbidden Request', url);
 }
 
 class TooManyRequestException extends AppException {
-  TooManyRequestException(String message, String url)
-      : super('You Exceed Request Limit', url);
+  TooManyRequestException(String? message, String url)
+      : super((message != null) ? message : 'You Exceed Request Limit', url);
 }
 
 class ServerException extends AppException {
-  ServerException(String message, String url) : super('Server Error', url);
+  ServerException(String? message, String url)
+      : super((message != null) ? message : 'Server Error', url);
 }

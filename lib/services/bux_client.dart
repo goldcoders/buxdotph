@@ -5,17 +5,16 @@ import 'dart:io';
 import 'package:buxdotph/services/app_exceptions.dart';
 import 'package:http/http.dart' as http;
 
-class BaseClient {
+class BuxClient {
   static const int TIMEOUT = 20;
 
-  Future<dynamic> post(
-      String baseUrl, String api, dynamic payloadObject) async {
-    Uri uri = Uri.parse(baseUrl + api);
-    dynamic payload = json.decode(payloadObject);
+  Future<dynamic> post(String baseUrl, String api, String payloadObject) async {
+    final Uri uri = Uri.parse(baseUrl + api);
+    final dynamic payload = json.decode(payloadObject);
     try {
-      var response = await http
+      final http.Response response = await http
           .post(uri, body: payload)
-          .timeout(Duration(seconds: TIMEOUT));
+          .timeout(const Duration(seconds: TIMEOUT));
       return _processResponse(response);
     } on SocketException {
       throw DefaultException('No Internet Connection', uri.toString());
@@ -26,9 +25,10 @@ class BaseClient {
   }
 
   Future<dynamic> get(String baseUrl, String api) async {
-    Uri uri = Uri.parse(baseUrl + api);
+    final Uri uri = Uri.parse(baseUrl + api);
     try {
-      var response = await http.get(uri).timeout(Duration(seconds: TIMEOUT));
+      final http.Response response =
+          await http.get(uri).timeout(const Duration(seconds: TIMEOUT));
       return _processResponse(response);
     } on SocketException {
       throw DefaultException('No Internet Connection', uri.toString());
@@ -38,10 +38,10 @@ class BaseClient {
     }
   }
 
-  dynamic _processResponse(dynamic response) {
+  dynamic _processResponse(http.Response response) {
     switch (response.statusCode) {
       case 200:
-        var responseJson = utf8.decode(response.bodyBytes);
+        final String responseJson = utf8.decode(response.bodyBytes);
         return responseJson;
       case 400:
         throw BadRequestException(

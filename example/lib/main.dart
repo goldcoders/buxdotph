@@ -1,4 +1,4 @@
-import 'package:buxdotph/services/base_client.dart';
+import 'package:buxdotph/services/bux_client.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -12,11 +12,6 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
@@ -25,14 +20,19 @@ class _MyAppState extends State<MyApp> {
         ),
         body: Center(
           child: ElevatedButton(
-              child: Text('test'),
               onPressed: () async {
-                var response = await BaseClient()
+                final response = await BuxClient()
                     .get('https://jsonplaceholder.typicode.com', '/todos/1');
                 print(response);
-              }),
+              },
+              child: const Text('test')),
         ),
       ),
     );
+  }
+
+  @override
+  void initState() {
+    super.initState();
   }
 }
