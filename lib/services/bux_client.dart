@@ -21,9 +21,12 @@ class BuxClient {
     http.Response? response;
 
     try {
-      response = await http
-          .post(uri, body: payloadObject, headers: headers)
-          .timeout(const Duration(seconds: TIMEOUT));
+      response = await http.post(
+        uri,
+        body: jsonEncode(payloadObject),
+        headers: headers,
+      );
+
       result = _processResponse(response);
     } on SocketException catch (e) {
       devlog.log(e.message, name: api);
