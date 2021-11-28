@@ -1,58 +1,91 @@
- ## Bux Ph Dart SDK
+ # Bux.ph Dark SDK
 
- ## 3 New Apis
- - OAUTH API : Generate token to be used on other 2 new Api
- - REPORTS API: List All Orders
- - MULTI-walet Api (we will not use this)
 
-## guide on packages
-https://flutter.dev/docs/development/packages-and-plugins/developing-packages
- ## Usage Api
- Bux.checkout(params);
-- https://github.com/goldcoders/bux.ph-checkout
- ```
- const apiURL = `${BUX_BASE_URL}/open/checkout`
- ```
+## Checkout API
+- Allows you to checkout
 
-- https://github.com/goldcoders/bux.ph-notification-url
- ```
- const apiURL = `${BUX_BASE_URL}/notification_url?req_id=${req_id}&client_id=${BUX_CLIENT_ID}&status=${status}&signature=${signature}`
- ```
-
-- https://github.com/goldcoders/bux.ph-channel-codes
- ```
- const apiURL = `${BUX_BASE_URL}/channel_codes?client_id=${BUX_CLIENT_ID}`
- ```
-
- - https://github.com/goldcoders/bux.ph-check-code
- ```
- const apiURL = `${BUX_BASE_URL}/check_code?req_id=${req_id}&client_id=${BUX_CLIENT_ID}&mode=API`
- ```
-
- - https://github.com/goldcoders/bux.ph-generate-code
- ```
-const apiURL = `${BUX_BASE_URL}/generate_code`
- ```
-
- Bux.direct(channel_code,params,notification_url,redirect_url);
-
- Bux.fetch(req_id);
-
- Bux.channels()
-
-## env
-```
-BUX_API_KEY=
-BUX_BASE_URL=
-BUX_CLIENT_ID=
-BUX_NOTIFY_URL
-BUX_REDIRECT_URL
-BUX_SITE_DOMAIN
+All the parameters that can be used on Checkout Api in JSON
+```json
+{
+"req_id": "TEST123d",
+"client_id": "0000001", // Set this up in your .env
+"amount": "50",
+"description": "test",
+"expiry": 2,
+"email": "test@example.ph",
+"contact": "9161234567",
+"name": "Juan Dela Cruz",
+"notification_url": "https://example.ph/bux_notif/",
+"redirect_url": "https://example.ph/sample_redirect/",
+"param1": "referral link",
+"param2": "delivery address"
+}
 ```
 
-## Batch Api
-https://developers.bux.ph/#tag/Credentials
-its possible to create a batch payment links
-we can use this to create multiple payment links
-links that we can use for inventory
-maximum of 50...
+## Usage
+
+1. Set up .env
+
+for production use `https://api.bux.ph/v1/api` as your BUX_BASE_URL
+
+```toml
+BUX_API_KEY=api_key
+BUX_BASE_URL=https://api.bux.ph/v1/api/sandbox
+BUX_CLIENT_ID=0000000001
+BUX_API_SECRET=secret
+```
+
+Initialize dotenv on your main function
+
+```dart
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+
+Future<void> main() async {
+  await dotenv.load();
+  runApp(MyApp());
+}
+```
+
+Add to Your pubspec.yaml
+
+```yaml
+flutter:
+  assets:
+    - .env
+```
+
+
+2. Create CheckoutPayload
+
+```dart
+import 'package:buxdotph/models/api/checkout_payload.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+...
+
+
+final CheckoutPayload payload = CheckoutPayload(
+    amount: 1000,
+    req_id: 'uuid_from_backend',
+    client_id: dotenv.env['BUX_CLIENT_ID']!,
+    description: 'subscription',
+    notification_url: 'https://google.com',
+    expiry: 2,
+    email: 'dummy@gmail.com',
+    contact: '09155555555',
+    name: 'John Dela Cruz',
+    redirect_url: 'https://goldcoders.dev',
+    param1: 'username',
+    param2: 'address',
+  );
+```
+
+- Pass the Payload to Bux.checkout()
+
+```dart
+import 'package:buxdotph/buxdotph.dart';
+
+...
+await Bux.checkout(payload);
+```
+
+the returned response is a `String?` type , you can `json_encode` it if there is no errors

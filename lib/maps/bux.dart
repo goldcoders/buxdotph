@@ -28,7 +28,7 @@ Map<String, dynamic> endpoints = <String, dynamic>{
     'production': Uri.parse('https://api.bux.ph/v1/api/generate_code/'),
   },
   BUX_CHECK_CODE_API: <String, dynamic>{
-    'headers': Headers.setDefault(acceptJson: false),
+    'headers': Headers.setDefault(),
     'method': 'GET',
     'query': CHECK_CODE_QUERY_CLASS,
     'sandbox': Uri.parse('https://api.bux.ph/v1/api/sandbox/check_code/'),

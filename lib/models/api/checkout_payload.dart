@@ -1,10 +1,6 @@
-import 'package:buxdotph/models/http/headers.dart';
-import 'package:buxdotph/models/http/methods.dart';
 import 'package:equatable/equatable.dart';
 
 class CheckoutPayloadEntity extends Equatable {
-  final HttpMethod method;
-  final Headers headers;
   final String req_id;
   final String client_id;
   final int amount;
@@ -18,9 +14,7 @@ class CheckoutPayloadEntity extends Equatable {
   final String? param1;
   final String? param2;
 
-  const CheckoutPayloadEntity(
-    this.method,
-    this.headers, {
+  const CheckoutPayloadEntity({
     required this.req_id,
     required this.client_id,
     required this.amount,
@@ -36,8 +30,6 @@ class CheckoutPayloadEntity extends Equatable {
   });
   @override
   List<Object?> get props => <Object?>[
-        method,
-        headers,
         req_id,
         client_id,
         amount,
@@ -69,7 +61,7 @@ class CheckoutPayloadEntity extends Equatable {
 // ignore: lines_longer_than_80_chars
 /// Other Params are Optional , but some you might want to add like email, contact, name, redirect_url, param1, param2
 class CheckoutPayload extends CheckoutPayloadEntity {
-  CheckoutPayload({
+  const CheckoutPayload({
     required String req_id,
     required String client_id,
     required int amount,
@@ -83,8 +75,6 @@ class CheckoutPayload extends CheckoutPayloadEntity {
     String? param1,
     String? param2,
   }) : super(
-          HttpMethod.POST,
-          Headers.setDefault(),
           req_id: req_id,
           client_id: client_id,
           amount: amount,

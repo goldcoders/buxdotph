@@ -1,44 +1,47 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:developer' as devlog;
 import 'dart:io';
 
-import 'package:buxdotph/services/app_exceptions.dart';
 import 'package:http/http.dart' as http;
+
+import 'app_exceptions.dart';
 
 class BuxClient {
   static const int TIMEOUT = 20;
 
-  Future<dynamic> post(String baseUrl, String api, String payloadObject) async {
+  Future<String?> post(
+    String baseUrl,
+    String api,
+    Map<String, String> payloadObject,
+    Map<String, String> headers,
+  ) async {
     final Uri uri = Uri.parse(baseUrl + api);
-    final dynamic payload = json.decode(payloadObject);
+    String? result;
+    http.Response? response;
+
     try {
-      final http.Response response = await http
-          .post(uri, body: payload)
+      response = await http
+          .post(uri, body: payloadObject, headers: headers)
           .timeout(const Duration(seconds: TIMEOUT));
-      return _processResponse(response);
-    } on SocketException {
-      throw DefaultException('No Internet Connection', uri.toString());
-    } on TimeoutException {
-      throw RequestTookLongException(
-          'Server Took Too Long to Respond', uri.toString());
+      result = _processResponse(response);
+    } on SocketException catch (e) {
+      devlog.log(e.message, name: api);
+      result = response?.body;
+    } on TimeoutException catch (e) {
+      devlog.log(e.message!, name: api);
+      result = response?.body;
+    } on UnauthorizedException catch (e) {
+      devlog.log(e.message!, name: api);
+      result = response?.body;
+    } catch (e, stacktrace) {
+      devlog.log(e.toString(), name: api);
+      devlog.log(stacktrace.toString(), name: api);
     }
+    return result;
   }
 
-  Future<dynamic> get(String baseUrl, String api) async {
-    final Uri uri = Uri.parse(baseUrl + api);
-    try {
-      final http.Response response =
-          await http.get(uri).timeout(const Duration(seconds: TIMEOUT));
-      return _processResponse(response);
-    } on SocketException {
-      throw DefaultException('No Internet Connection', uri.toString());
-    } on TimeoutException {
-      throw RequestTookLongException(
-          'Server Took Too Long to Respond', uri.toString());
-    }
-  }
-
-  dynamic _processResponse(http.Response response) {
+  String _processResponse(http.Response response) {
     switch (response.statusCode) {
       case 200:
         final String responseJson = utf8.decode(response.bodyBytes);
