@@ -4,7 +4,7 @@
 .packages
 .pub/
 
-build/
+**/build/**
 .env*
 !.env.example
 !.env.test
@@ -12,7 +12,6 @@ build/
 *.bak
 
 .fvm/*
-!.fvm/fvm_config.json
 
 .vscode/*
 !.vscode/launch.json
