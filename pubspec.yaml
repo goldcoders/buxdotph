@@ -1,6 +1,6 @@
 name: buxdotph
 description: Flutter Plugin For Bux.ph Payment Gateway
-version: 0.0.2
+version: 0.0.3
 homepage: https://github.com/goldcoders/buxdotph
 
 environment:
