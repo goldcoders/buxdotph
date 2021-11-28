@@ -13,3 +13,6 @@ build/
 
 .fvm/*
 !.fvm/fvm_config.json
+
+.vscode/*
+!.vscode/launch.json
