@@ -23,8 +23,12 @@ class Bux {
   /// Channel Code From Channels
   /// WE need to Implement here Dynamic URL when using redirect_url
   ///
-  static Future<dynamic> direct(String channel_code, List<dynamic> params,
-      String notification_url, String redirect_url) async {
+  static Future<dynamic> direct(
+    String channel_code,
+    List<dynamic> params,
+    String notification_url,
+    String redirect_url,
+  ) async {
     throw UnimplementedError();
   }
 

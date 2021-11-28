@@ -48,23 +48,34 @@ class BuxClient {
         return responseJson;
       case 400:
         throw BadRequestException(
-            utf8.decode(response.bodyBytes), response.request!.url.toString());
+          utf8.decode(response.bodyBytes),
+          response.request!.url.toString(),
+        );
       case 401:
         throw UnauthorizedException(
-            utf8.decode(response.bodyBytes), response.request!.url.toString());
+          utf8.decode(response.bodyBytes),
+          response.request!.url.toString(),
+        );
       case 403:
         throw ForbiddenRequestException(
-            utf8.decode(response.bodyBytes), response.request!.url.toString());
+          utf8.decode(response.bodyBytes),
+          response.request!.url.toString(),
+        );
       case 429:
         throw TooManyRequestException(
-            utf8.decode(response.bodyBytes), response.request!.url.toString());
+          utf8.decode(response.bodyBytes),
+          response.request!.url.toString(),
+        );
       case 500:
         throw ServerException(
-            utf8.decode(response.bodyBytes), response.request!.url.toString());
+          utf8.decode(response.bodyBytes),
+          response.request!.url.toString(),
+        );
       default:
         throw DefaultException(
-            'Error Occured with code: ${response.statusCode}',
-            response.request!.url.toString());
+          'Error Occured with code: ${response.statusCode}',
+          response.request!.url.toString(),
+        );
     }
   }
 }
