@@ -15,5 +15,3 @@
 
 .vscode/*
 !.vscode/launch.json
-
-example/*
