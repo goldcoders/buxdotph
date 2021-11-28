@@ -10,3 +10,6 @@ build/
 !.env.test
 
 *.bak
+
+.fvm/*
+!.fvm/fvm_config.json
