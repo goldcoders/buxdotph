@@ -1,0 +1,15 @@
+const String BUX_API_KEY = 'BUX_API_KEY';
+const String BUX_BASE_URL = 'BUX_BASE_URL';
+const String BUX_CLIENT_ID = 'BUX_CLIENT_ID';
+const String BUX_NOTIFY_URL = 'BUX_NOTIFY_URL';
+const String BUX_REDIRECT_URL = 'BUX_REDIRECT_URL';
+const String BUX_SITE_DOMAIN = 'BUX_SITE_DOMAIN';
+const String BUX_CHECKOUT_API = 'BUX_CHECKOUT_API';
+const String BUX_GENERATE_CODE_API = 'BUX_GENERATE_CODE_API';
+const String BUX_CHANNEL_CODES_API = 'BUX_CHANNEL_CODES_API';
+const String BUX_CHECK_CODE_API = 'BUX_CHECK_CODE_API';
+const String BUX_CANCEL_TRANSACTION_API = 'BUX_CANCEL_TRANSACTION_API';
+const String CHECK_CODE_QUERY_CLASS = 'CheckCodeQuery';
+const String BUX_DIRECT_PAYLOAD_CLASS = 'DirectPayload';
+const String BUX_CHECKOUT_PAYLOAD_CLASS = 'CheckoutPayload';
+const String CANCEL_PAYLOAD_CLASS = 'CancelTransaction';
