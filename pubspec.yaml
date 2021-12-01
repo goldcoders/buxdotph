@@ -13,8 +13,6 @@ dependencies:
   dartz: ^0.10.0
   dotenv: ^3.0.0
   equatable: ^2.0.3
-  flutter:
-    sdk: flutter
   http: ^0.13.4
 
 dev_dependencies:
