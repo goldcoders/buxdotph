@@ -26,11 +26,11 @@ All the parameters that can be used on Checkout Api in JSON
 
 1. Set up .env
 
-for production use `https://api.bux.ph/v1/api` as your BUX_BASE_URL
+for production use set BUX_SANDBOX to `false`
 
 ```toml
 BUX_API_KEY=api_key
-BUX_BASE_URL=https://api.bux.ph/v1/api/sandbox
+BUX_SANDBOX=true
 BUX_CLIENT_ID=0000000001
 BUX_API_SECRET=secret
 ```
@@ -38,10 +38,10 @@ BUX_API_SECRET=secret
 Initialize dotenv on your main function
 
 ```dart
-import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:dotenv/dotenv.dart';
 
 Future<void> main() async {
-  await dotenv.load();
+  load();
   runApp(MyApp());
 }
 ```
@@ -58,15 +58,15 @@ flutter:
 2. Create CheckoutPayload
 
 ```dart
-import 'package:buxdotph/models/api/checkout_payload.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:buxdotph/buxdotph';
+import 'package:dotenv/dotenv.dart';
 ...
 
 
 final CheckoutPayload payload = CheckoutPayload(
     amount: 1000,
     req_id: 'uuid_from_backend',
-    client_id: dotenv.env['BUX_CLIENT_ID']!,
+    client_id: env['BUX_CLIENT_ID']!,
     description: 'subscription',
     notification_url: 'https://google.com',
     expiry: 2,
