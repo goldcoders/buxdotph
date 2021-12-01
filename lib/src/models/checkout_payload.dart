@@ -22,7 +22,7 @@ class CheckoutPayload extends CheckoutPayloadEntity {
     required int amount,
     required String description,
     required String notification_url,
-    int? expiry,
+    int? expiry = 2,
     String? email,
     String? contact,
     String? name,
