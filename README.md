@@ -59,7 +59,7 @@ Note: Make sure to re-run this if you change any in your .env file
 
 ```
 dependencies:
-  buxdotph: ^0.0.11
+  buxdotph: ^0.1.0
 ```
 
 2. Initialize Bux
@@ -79,6 +79,7 @@ final Bux bux = const Bux(
 
 3. Create CheckoutPayload
 
+// with all paramaters filled up
 ```dart
 import 'package:buxdotph/buxdotph';
 import 'package:example/env/env.dart';
@@ -99,6 +100,18 @@ final CheckoutPayload payload = CheckoutPayload(
     param1: 'username',
     param2: 'address',
   );
+```
+
+// with minimum required parameters filled up
+
+```dart
+CheckoutPayload payload = CheckoutPayload(
+  amount: 1000,
+  req_id: 'bux001',
+  client_id: clientId,
+  description: 'test',
+  notification_url: 'https://goldcoders.dev/notify',
+);
 ```
 
 4. Pass the Payload to bux checkout
