@@ -1,7 +1,7 @@
 name: buxdotph
 description: A dart client for bux.ph api. This client makes it simple for
   developers to start accepting payment with bux.ph
-version: 0.1.1
+version: 0.1.2
 homepage: "https://goldcoders.dev"
 repository: "https://github.com/goldcoders/buxdotph"
 

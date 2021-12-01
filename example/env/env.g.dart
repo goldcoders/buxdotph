@@ -8,7 +8,7 @@ part of 'env.dart';
 
 class _Env {
   static const bool buxSandbox = true;
-  static const String buxApiKey = 'e0a7f06f2f606a54398316d0b91f1766';
-  static const String buxClientId = '0000018189';
-  static const String buxApiSecret = 'd47f3e582e59';
+  static const String buxApiKey = 'api_key';
+  static const String buxClientId = '0000000001';
+  static const String buxApiSecret = 'secret';
 }
