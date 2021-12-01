@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer' as devlog;
 
 import 'package:buxdotph/src/models/checkout_payload.dart';
 import 'package:buxdotph/src/services/bux_client.dart';
@@ -55,12 +56,10 @@ class Bux extends BuxEntity {
     const String api_endpoint = '/open/checkout';
 
     final Map<String, String> headers = _setHeaders();
-
-    //! TODO: Remove This After Testing
-    print('base_url ${_baseUrl()}');
-    print('api_endpoint: $api_endpoint');
-    print('payload: ${payload.toJson()}');
-    print('headers: $headers');
+    devlog.log(_baseUrl(), name: 'base_url');
+    devlog.log(api_endpoint, name: 'base_url');
+    devlog.log(payload.toString(), name: 'payload');
+    devlog.log(headers.toString(), name: 'headers');
 
     return buxClient.post(
       _baseUrl(),

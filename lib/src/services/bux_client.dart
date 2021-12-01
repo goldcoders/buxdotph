@@ -17,7 +17,8 @@ class BuxClient {
     String? result;
     http.Response? response;
     print('---------------------------------------------------------');
-    print(jsonEncode(payloadObject));
+    devlog.inspect(payloadObject);
+    devlog.inspect(headers);
     print('---------------------------------------------------------');
     try {
       response = await http.post(
