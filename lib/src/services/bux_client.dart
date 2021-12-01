@@ -16,11 +16,9 @@ class BuxClient {
     final Uri uri = Uri.parse(baseUrl + api);
     String? result;
     http.Response? response;
-    print('---------------------------------------------------------');
     devlog.inspect(uri);
     devlog.inspect(jsonEncode(payloadObject));
     devlog.inspect(headers);
-    print('---------------------------------------------------------');
     try {
       response = await http.post(
         uri,
