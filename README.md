@@ -59,7 +59,7 @@ Note: Make sure to re-run this if you change any in your .env file
 
 ```
 dependencies:
-  buxdotph: ^0.0.10
+  buxdotph: ^0.0.11
 ```
 
 2. Initialize Bux

@@ -57,7 +57,7 @@ class Bux extends BuxEntity {
 
     final Map<String, String> headers = _setHeaders();
     devlog.log(_baseUrl(), name: 'base_url');
-    devlog.log(api_endpoint, name: 'base_url');
+    devlog.log(api_endpoint, name: 'api_endpoint');
     devlog.log(payload.toString(), name: 'payload');
     devlog.log(headers.toString(), name: 'headers');
 
