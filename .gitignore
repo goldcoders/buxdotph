@@ -29,7 +29,7 @@ doc/api/
 **/example/**
 !**/example/main.dart
 !**/example/README.md
-*.bak
 !**/example/pubspec.yaml
 !**/example/env/env.dart
 !**/example/env/env.g.dart
+*.bak
