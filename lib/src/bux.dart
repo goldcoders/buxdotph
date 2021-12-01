@@ -55,6 +55,13 @@ class Bux extends BuxEntity {
     const String api_endpoint = '/open/checkout';
 
     final Map<String, String> headers = _setHeaders();
+
+    //! TODO: Remove This After Testing
+    print('base_url ${_baseUrl()}');
+    print('api_endpoint: $api_endpoint');
+    print('payload: ${payload.toJson()}');
+    print('headers: $headers');
+
     return buxClient.post(
       _baseUrl(),
       api_endpoint,

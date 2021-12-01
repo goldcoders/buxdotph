@@ -59,16 +59,22 @@ Note: Make sure to re-run this if you change any in your .env file
 
 ```
 dependencies:
-  buxdotph: ^0.0.8
+  buxdotph: ^0.0.9
 ```
 
 2. Initialize Bux
 
 ```dart
-import 'package:example/env/env.dart';
+// generated env.dart
+import 'env/env.dart';
 import 'package:buxdotph/buxdotph.dart';
 
-final Bux bux = Bux(apiKey: Env.apiKey,clientId: Env.clientId,sandbox: Env.sandbox);
+final Bux bux = const Bux(
+    apiKey: Env.buxApiKey,
+    apiSecret: Env.buxApiSecret,
+    clientId: Env.buxClientId,
+    sandbox: Env.buxSandbox,
+);
 ```
 
 3. Create CheckoutPayload
@@ -82,7 +88,7 @@ import 'package:example/env/env.dart';
 final CheckoutPayload payload = CheckoutPayload(
     amount: 1000,
     req_id: 'uuid_from_backend',
-    client_id: ${Env.clientId},
+    client_id: ${Env.buxClientId},
     description: 'subscription',
     notification_url: 'https://google.com',
     expiry: 2,

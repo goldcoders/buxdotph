@@ -7,8 +7,6 @@ import 'package:buxdotph/src/exceptions/app_exceptions.dart';
 import 'package:http/http.dart' as http;
 
 class BuxClient {
-  static const int TIMEOUT = 20;
-
   Future<String?> post(
     String baseUrl,
     String api,
@@ -18,7 +16,9 @@ class BuxClient {
     final Uri uri = Uri.parse(baseUrl + api);
     String? result;
     http.Response? response;
-
+    print('---------------------------------------------------------');
+    print(jsonEncode(payloadObject));
+    print('---------------------------------------------------------');
     try {
       response = await http.post(
         uri,
