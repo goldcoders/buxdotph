@@ -30,6 +30,6 @@ doc/api/
 !**/example/main.dart
 !**/example/README.md
 !**/example/pubspec.yaml
-!**/example/env/env.dart
-!**/example/env/env.g.dart
+!example/env/env.dart
+!example/env/env.g.dart
 *.bak
