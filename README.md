@@ -1,33 +1,21 @@
  # Bux.ph Dark SDK
 
+## Secure Bux Credentials Implementation (Optional)
 
-## Checkout API
-- Allows you to checkout
+1. Add [envify] to pubspec.yaml
 
-All the parameters that can be used on Checkout Api in JSON
-```json
-{
-"req_id": "TEST123d",
-"client_id": "0000001", // Set this up in your .env
-"amount": "50",
-"description": "test",
-"expiry": 2,
-"email": "test@example.ph",
-"contact": "9161234567",
-"name": "Juan Dela Cruz",
-"notification_url": "https://example.ph/bux_notif/",
-"redirect_url": "https://example.ph/sample_redirect/",
-"param1": "referral link",
-"param2": "delivery address"
-}
+```
+dependencies:
+  envify: any
+
+dev_dependencies:
+  envify_generator: any
+  build_runner: any
 ```
 
-## Usage
+2. Set up .env
 
-1. Set up .env
-
-for production use set BUX_SANDBOX to `false`
-
+// .env
 ```toml
 BUX_API_KEY=api_key
 BUX_SANDBOX=true
@@ -35,38 +23,66 @@ BUX_CLIENT_ID=0000000001
 BUX_API_SECRET=secret
 ```
 
-Initialize dotenv on your main function
+3. create `lib/env/env.dart` on your project
 
-```dart
-import 'package:dotenv/dotenv.dart';
+//env.dart
+```
+import 'package:envify/envify.dart';
 
-Future<void> main() async {
-  load();
-  runApp(MyApp());
+part 'env.g.dart';
+
+@Envify()
+abstract class Env {
+  static const bool buxSandbox = _Env.buxSandbox;
+  static const String buxApiKey = _Env.buxApiKey;
+  static const String buxClientId = _Env.buxClientId;
+  static const String buxApiSecret = _Env.buxApiSecret;
 }
 ```
 
-Add to Your pubspec.yaml
+4. Run Build Runner
 
-```yaml
-flutter:
-  assets:
-    - .env
+```sh
+# dart
+pub run build_runner build
+# flutter
+flutter pub run build_runner build
 ```
 
+Note: Make sure to re-run this if you change any in your .env file
 
-2. Create CheckoutPayload
+5. add to .gitigniore this entry `env.g.dart` and `.env`
+
+
+## Usage
+1. Add to Your pubspec.yaml
+
+```
+dependencies:
+  buxdotph: ^0.0.8
+```
+
+2. Initialize Bux
+
+```dart
+import 'package:example/env/env.dart';
+import 'package:buxdotph/buxdotph.dart';
+
+final Bux bux = Bux(apiKey: Env.apiKey,clientId: Env.clientId,sandbox: Env.sandbox);
+```
+
+3. Create CheckoutPayload
 
 ```dart
 import 'package:buxdotph/buxdotph';
-import 'package:dotenv/dotenv.dart';
+import 'package:example/env/env.dart';
 ...
 
 
 final CheckoutPayload payload = CheckoutPayload(
     amount: 1000,
     req_id: 'uuid_from_backend',
-    client_id: env['BUX_CLIENT_ID']!,
+    client_id: ${Env.clientId},
     description: 'subscription',
     notification_url: 'https://google.com',
     expiry: 2,
@@ -79,13 +95,11 @@ final CheckoutPayload payload = CheckoutPayload(
   );
 ```
 
-- Pass the Payload to Bux.checkout()
+4. Pass the Payload to bux checkout
 
 ```dart
 import 'package:buxdotph/buxdotph.dart';
 
 ...
-await Bux.checkout(payload);
+await bux.checkout(payload);
 ```
-
-the returned response is a `String?` type , you can `json_encode` it if there is no errors
