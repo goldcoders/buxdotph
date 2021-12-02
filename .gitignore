@@ -14,3 +14,23 @@ build/
 
 # Directory created by dartdoc
 doc/api/
+
+# The .vscode folder contains launch configuration and tasks you configure in
+# VS Code which you may wish to be included in version control, so this line
+# is commented out by default.
+**/.vscode/**
+!**/.vscode/launch.json
+
+**/docs/**
+
+**/.fvm/**
+!**/.fvm/fvm_config.json
+
+**/example/*
+**/example/main.dart
+!**example/README.md
+!**example/pubspec.yaml
+!**example/env.dart
+!**example/env.g.dart
+
+*.bak
